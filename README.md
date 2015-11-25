@@ -1,2 +1,4 @@
 # reynolds.js
 Current work in progress
+
+![Red](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAklEQVR4AewaftIAAABgSURBVN3BAQEAAAiDMKR/59uD7QYjQCIkQiIkQiIkQiIkQiIkQiIkQiIkQiIkQiIkQiIkQiIkQiIkQiIkQiIkQiIkQiIkQiIkQiIkQiIkQiIkQiIkQiIkQiIkQiIkQiIeB7ECYkMk598AAAAASUVORK5CYII= "Red")

@@ -1,5 +1,5 @@
 &block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;
-### &reg; &rcaron;&ecaron;&ycirc;&ncaron;&ocirc;&#108;&#100;&scirc;&middot;&jcirc;&scaron;
+### &reg;&ecaron;&ycirc;&ncaron;&ocirc;&#108;&#100;&scirc;&middot;&jcirc;&scaron;
 &block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;&block;
 
 

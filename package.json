@@ -1,0 +1,27 @@
+{
+  "name": "reynolds.js",
+  "version": "0.0.0",
+  "description": "research, notes and experiments in functional javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/spacious/reynolds.js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/spacious/reynolds.js/issues"
+  },
+  "homepage": "https://github.com/spacious/reynolds.js",
+  "devDependencies": {
+    "control.async": "^0.5.2",
+    "core.lambda": "^1.0.0",
+    "data.maybe": "^1.2.1",
+    "data.task": "^3.0.0",
+    "moment": "^2.10.6",
+    "ramda": "^0.18.0"
+  }
+}

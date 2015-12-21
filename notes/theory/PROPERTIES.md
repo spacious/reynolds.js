@@ -56,6 +56,9 @@ m.chain(f).chain(g) == m.chain(x => f(x).chain(g))
 
 ```javascript
 
+// identity
+A.of(id).ap(v) == v
+
 // FantasyLand Functor (map)
 u.map(x => x) == u
 
@@ -64,6 +67,17 @@ u.map(x => Id(x)).sequence(Id.of) == Id.of
 
 // FantasyLand Applicative (of)
 a.of(x => x).ap(v) == v
+
+```
+
+applying `id` all from within a functor shouldn't alter the value in v
+
+
+```javascript
+
+var v = Identity.of("Pillow Pets");
+Identity.of(id).ap(v) == v
+
 
 ```
 
@@ -97,7 +111,12 @@ m.chain(m.of) == m
 
 ### Composition
 
+check that our standard function composition holds when applying inside of containers
+
 ```javascript
+
+// composition
+A.of(compose).ap(u).ap(v).ap(w) == u.ap(v.ap(w));
 
 // FantasyLand Functor (map)
 u.map(x => f(g(x))) == u.map(g).map(f)
@@ -110,21 +129,56 @@ u.map(Compose).sequence(Compose) == Compose(u.sequence(f.of).map(x => x.sequence
 
 ```
 
-### Homomorphism
 
 ```javascript
 
+var u = IO.of(_.toUpper);
+var v = IO.of(_.concat("& beyond"));
+var w = IO.of("blood bath ");
+
+IO.of(_.compose).ap(u).ap(v).ap(w) == u.ap(v.ap(w))
+
+```
+
+### Homomorphism
+
+ homomorphism is just a structure preserving map.
+
+ In fact, a functor is just a homomorphism between categories as it preserves the original category's structure under the mapping.
+
+```javascript
+
+// homomorphism
+A.of(f).ap(A.of(x)) == A.of(f(x))
+
 // FantasyLand Applicative (of)
 a.of(f).ap(a.of(x)) == a.of(f(x))
+
+Either.of(_.toUpper).ap(Either.of("oreos")) == Either.of(_.toUpper("oreos"))
 
 ```
 
 ### Interchange
 
+The interchange states that it doesn't matter if we choose to lift our function into the left or right side of `ap`.
+
 ```javascript
+
+// interchange
+v.ap(A.of(x)) == A.of(function(f) { return f(x) }).ap(v)
 
 // FantasyLand Applicative (of)
 u.ap(a.of(y)) == a.of(f => f(y)).ap(u)
+
+```
+
+
+```javascript
+
+var v = Task.of(_.reverse);
+var x = 'Sparklehorse';
+
+v.ap(Task.of(x)) == Task.of(function(f) { return f(x) }).ap(v)
 
 ```
 

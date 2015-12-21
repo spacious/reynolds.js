@@ -1,31 +1,55 @@
+
 # FantasyLand Notes
+
+[Fantasy Land Specification](https://github.com/fantasyland/fantasy-land)
+
+https://github.com/fantasyland/fantasy-sorcery/blob/master/index.js
+
 ## Specifications
-### Setoid 
+
+### Setoid
 - implements `equals`
 - equivalence operation
 - `a.equals(b) = true/false`
 - accepts one parameter of type Setoid and returns true/false
 
 ##### Reflexivity
+
 ```javascript
+
 a.equals(a) == true
+
 ```
+
 ##### Symmetry
+
 ```javascript
+
 a.equals(b) == b.equals(a)
-```    
+
+```
+
 ##### Transitivity
+
 ```javascript
+
 if a.equals(b) and b.equals(c) then a.equals(c)
-```  
+
+```
+
 #### Example
+
 ```javascript
+
 // Setoid
 Id.prototype.equals = function(b) {
   return typeof this.value.equals === "function" ? this.value.equals(b.value) : this.value === b.value;
 };
+
 ```
-### Semigroup 
+
+### Semigroup
+
 - implements `concat`
 - associative operation
 - `a.concat(b) = c`
@@ -154,35 +178,59 @@ Id.prototype.reduce = function(f, acc) {
   return f(acc, this.value);
 };
 ```
+
 ### Traversable < Functor
+
 - implements `sequence`
 - u.sequence(of)
 - of must return the Applicative that u contains
+
 ```javascript
+
 var traverse = function(f, of){ return this.map(f).sequence(of); }
+
 ```
-##### Naturality 
+
+##### Naturality
+
 where t is natural transformation from f to g
+
 ```javascript
+
 t(u.sequence(f.of)) == u.map(t).sequence(g.of)
+
 ```
+
 ##### Identity
+
 ```javascript
+
 u.map(x => Id(x)).sequence(Id.of) == Id.of
+
 ```
+
 ##### Composition
+
 ```javascript
-u.map(Compose).sequence(Compose) == Compose(u.sequence(f.of).map(x => x.sequence(g.of))) 
+
+u.map(Compose).sequence(Compose) == Compose(u.sequence(f.of).map(x => x.sequence(g.of)))
+
 ```
+
 #### Example
+
 ```javascript
+
 // Traversable
 Id.prototype.sequence = function(of) {
 // the of argument is only provided for types where map might fail.
   return this.value.map(Id.of);
+
 };
+
 ```
 ### Chain < Apply
+
 - implements `chain`
 - derives `ap` as:	`function ap(m) { return this.chain(f => m.map(f)); }`
 - `m.chain(f)`
@@ -190,26 +238,38 @@ Id.prototype.sequence = function(of) {
 - must return value of the same Chain
 
 #### Associativity
+
 ```javascript
+
 m.chain(f).chain(g) == m.chain(x => f(x).chain(g))
+
 ```
 #### Example	
+
 ```javascript
+
 // Chain
 Id.prototype.chain = function(f) {
     return f(this.value);
 };
+
 ```
 ### Monad < Chain, Applicative
 - chain operation
 
 ##### Left Identity
+
 ```javascript
+
 m.of(a).chain(f) == f(a)
+
 ```
 ##### Right Identity
+
 ```javascript
+
 m.chain(m.of) == m
+
 ```
 
 **Derives `ap` as:	`function ap(m) { return this.chain(f => m.map(f)); }`**
@@ -248,30 +308,44 @@ function map(f){ return this.of(f(this.value))); }
 // of: function of(a){ return new <Type>(a); }
 function map(f){ return new <Type>(f(this.value))); }
 ```
+
 ### Extend
+
 - implements `extend`
 - `w.extend(f)`
 - `f` must be a function
 - `f` must return a valid type V for some variable "v" in w
 - extend must return a value of the same Extend
+
 ```javascript
+
 w.extend(g).extend(f) == w.extend(_w => f(_w.extend(g)))
+
 ```
-#### Example	
+
+#### Example
+
 ```javascript
+
 // Extend
 Id.prototype.extend = function(f) {
   return new Id(f(this));
 };
+
 ```
+
 ### Comonad < Functor, Extend
+
 - implements `extract` method
 - extract must return a value of type v, for some variable v contained in c
 - v must have the same type that f returns in extend
+
 ```javascript
+
 w.extend(_w => _w.extract()) == w
 w.extend(f).extract() == f(w)
 w.extend(f) = w.extend(x => x).map(f)
+
 ```
 #### Example	
 ```javascript
